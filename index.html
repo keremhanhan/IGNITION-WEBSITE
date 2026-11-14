@@ -1,975 +1,248 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101116">
-  <meta name="description" content="Verse Mate Studios. Özgün oyunlar, dijital dünyalar ve interaktif deneyimler geliştiriyoruz.">
-  <title>VERSE MATE STUDIOS | Create Beyond</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111216">
+  <meta name="description" content="IGNITION, Verse Mate Studios tarafından geliştirilen 5'e 5 taktiksel FPS oyun projesi.">
+  <meta property="og:title" content="IGNITION | Different by Design">
+  <meta property="og:description" content="Takımını kur. Stratejini belirle. IGNITION dünyasını keşfet.">
+  <title>IGNITION | Different by Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-    :root {
-      --bg: #101116;
-      --surface: #181a22;
-      --surface2: #20232d;
-      --white: #f1f2f5;
-      --muted: #969aa8;
-      --blue: #6485ff;
-      --line: #30333e;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: Inter, Arial, sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .container {
-      width: 82%;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    .navbar {
-      height: 82px;
-      padding: 0 9%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-      background: #101116ed;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 10;
-      backdrop-filter: blur(15px);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .logo-symbol {
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--blue);
-      display: grid;
-      place-items: center;
-      color: var(--blue);
-      font-size: 17px;
-      font-weight: 900;
-      transform: rotate(45deg);
-    }
-
-    .logo-symbol span {
-      transform: rotate(-45deg);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
-      transition: .2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--white);
-    }
-
-    .nav-contact {
-      color: var(--blue) !important;
-    }
-
-    .menu-button {
-      display: none;
-      color: white;
-      background: transparent;
-      border: 1px solid var(--line);
-      padding: 10px 14px;
-      cursor: pointer;
-    }
-
-    /* HERO */
-
-    .hero {
-      min-height: 780px;
-      padding: 170px 9% 100px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse at 78% 45%, #6485ff25, transparent 38%),
-        linear-gradient(120deg, #101116, #151822);
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(#ffffff08 1px, transparent 1px),
-        linear-gradient(90deg, #ffffff08 1px, transparent 1px);
-      background-size: 65px 65px;
-      mask-image: linear-gradient(90deg, transparent, black);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-    }
-
-    .eyebrow {
-      color: var(--blue);
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 3px;
-      margin-bottom: 27px;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      text-transform: uppercase;
-      font-weight: 900;
-      line-height: .92;
-    }
-
-    h1 {
-      font-size: clamp(90px, 14vw, 180px);
-      letter-spacing: -4px;
-    }
-
-    h1 span {
-      color: var(--blue);
-    }
-
-    .hero-subtitle {
-      margin-top: 27px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 4px;
-      color: #c6c9d3;
-    }
-
-    .hero-description {
-      max-width: 520px;
-      margin-top: 25px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.9;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      margin-top: 38px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      padding: 17px 24px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      display: inline-flex;
-      align-items: center;
-      gap: 25px;
-      transition: .2s;
-    }
-
-    .button-primary {
-      background: var(--blue);
-      color: white;
-    }
-
-    .button-primary:hover {
-      background: #829bff;
-      transform: translateY(-3px);
-    }
-
-    .button-outline {
-      border: 1px solid #555967;
-      color: var(--white);
-    }
-
-    .button-outline:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    .hero-index {
-      position: absolute;
-      right: 9%;
-      bottom: 55px;
-      color: #777d8e;
-      font-size: 10px;
-      letter-spacing: 2px;
-    }
-
-    .hero-orbit {
-      position: absolute;
-      right: 7%;
-      top: 23%;
-      width: 430px;
-      height: 430px;
-      border: 1px solid #6485ff30;
-      border-radius: 50%;
-      transform: rotate(-25deg);
-    }
-
-    .hero-orbit::before {
-      content: "";
-      position: absolute;
-      inset: 45px;
-      border: 1px solid #6485ff35;
-      border-radius: 50%;
-    }
-
-    .hero-orbit::after {
-      content: "VM";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: #6485ff;
-      font: 900 140px 'Barlow Condensed', sans-serif;
-      opacity: .16;
-    }
-
-    /* INTRO */
-
-    .intro {
-      padding: 125px 9%;
-      background: #f0f1f5;
-      color: #101116;
-    }
-
-    .intro .eyebrow {
-      color: #4969df;
-    }
-
-    .intro h2 {
-      font-size: clamp(55px, 8vw, 105px);
-      max-width: 1000px;
-    }
-
-    .intro h2 span {
-      color: #6485ff;
-    }
-
-    .intro-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-top: 45px;
-      align-items: start;
-    }
-
-    .intro-bottom p {
-      color: #626675;
-      font-size: 14px;
-      line-height: 1.9;
-      max-width: 540px;
-    }
-
-    .intro-label {
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: #4969df;
-    }
-
-    /* ABOUT */
-
-    .about {
-      padding: 120px 9%;
-      background: var(--bg);
-    }
-
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 30px;
-      margin-bottom: 55px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(55px, 8vw, 90px);
-    }
-
-    .section-heading p {
-      max-width: 330px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .values {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .value-card {
-      padding: 35px;
-      min-height: 260px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      transition: .25s;
-    }
-
-    .value-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-5px);
-    }
-
-    .value-number {
-      color: var(--blue);
-      font-size: 11px;
-      letter-spacing: 2px;
-      font-weight: 900;
-    }
-
-    .value-card h3 {
-      font-size: 35px;
-      margin: 55px 0 15px;
-    }
-
-    .value-card p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    /* PROJECTS */
-
-    .projects {
-      padding: 120px 9%;
-      background: var(--surface);
-    }
-
-    .projects .section-heading {
-      margin-bottom: 45px;
-    }
-
-    .project-card {
-      min-height: 430px;
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      background: #11131a;
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
-    .project-visual {
-      position: relative;
-      min-height: 430px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 50%, #b91c2c55, transparent 45%),
-        linear-gradient(135deg, #29212a, #11131a);
-    }
-
-    .project-visual::before {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border: 1px solid #ffffff25;
-      transform: rotate(45deg);
-    }
-
-    .project-visual strong {
-      position: relative;
-      z-index: 1;
-      font: 900 clamp(70px, 10vw, 130px) 'Barlow Condensed', sans-serif;
-      letter-spacing: -3px;
-    }
-
-    .project-info {
-      padding: 55px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .project-info h3 {
-      font-size: 65px;
-      margin-bottom: 20px;
-    }
-
-    .project-info p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-      margin-bottom: 30px;
-    }
-
-    .project-status {
-      color: var(--blue);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-    }
-
-    /* PROCESS */
-
-    .process {
-      padding: 120px 9%;
-      background: #f0f1f5;
-      color: #101116;
-    }
-
-    .process .eyebrow {
-      color: #4969df;
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin-top: 55px;
-      border-top: 1px solid #c9ccd6;
-    }
-
-    .process-item {
-      padding: 30px 22px 20px 0;
-      border-right: 1px solid #c9ccd6;
-    }
-
-    .process-item:not(:first-child) {
-      padding-left: 22px;
-    }
-
-    .process-item:last-child {
-      border-right: none;
-    }
-
-    .process-item b {
-      font: 900 45px 'Barlow Condensed', sans-serif;
-      color: #6485ff;
-    }
-
-    .process-item h3 {
-      font-size: 27px;
-      margin: 25px 0 12px;
-    }
-
-    .process-item p {
-      font-size: 11px;
-      color: #626675;
-      line-height: 1.8;
-    }
-
-    /* CONTACT */
-
-    .contact {
-      padding: 115px 9%;
-      background:
-        radial-gradient(ellipse at 80% 50%, #6485ff25, transparent 40%),
-        #14161e;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 35px;
-    }
-
-    .contact h2 {
-      font-size: clamp(55px, 8vw, 95px);
-    }
-
-    .contact p {
-      margin-top: 20px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    footer {
-      padding: 45px 9% 25px;
-      background: #0b0c10;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 35px;
-      gap: 25px;
-    }
-
-    .footer-slogan {
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 2px;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--line);
-      padding-top: 22px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 18px;
-      color: #747987;
-      font-size: 9px;
-      letter-spacing: 1px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-      margin-top: 22px;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 1px;
-    }
-
-    .footer-links a:hover {
-      color: var(--blue);
-    }
-
-    @media(max-width: 900px) {
-      .hero-orbit {
-        right: -180px;
-        opacity: .6;
-      }
-
-      .project-card {
-        grid-template-columns: 1fr;
-      }
-
-      .project-visual {
-        min-height: 300px;
-      }
-
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-      }
-
-      .process-item:nth-child(2) {
-        border-right: none;
-      }
-    }
-
-    @media(max-width: 650px) {
-      .navbar {
-        padding: 0 6%;
-      }
-
-      .menu-button {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 82px;
-        left: 0;
-        width: 100%;
-        padding: 25px 6%;
-        background: #101116;
-        border-bottom: 1px solid var(--line);
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .hero {
-        min-height: 730px;
-        padding: 150px 6% 100px;
-      }
-
-      .hero-orbit {
-        right: -250px;
-        top: 35%;
-        width: 350px;
-        height: 350px;
-      }
-
-      .hero-index {
-        right: 6%;
-        font-size: 8px;
-      }
-
-      .intro,
-      .about,
-      .projects,
-      .process {
-        padding: 85px 6%;
-      }
-
-      .intro-bottom {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .values {
-        grid-template-columns: 1fr;
-      }
-
-      .value-card {
-        min-height: 220px;
-      }
-
-      .project-info {
-        padding: 35px 25px;
-      }
-
-      .project-info h3 {
-        font-size: 55px;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .process-item,
-      .process-item:not(:first-child) {
-        padding: 25px 0;
-        border-right: none;
-        border-bottom: 1px solid #c9ccd6;
-      }
-
-      .contact {
-        padding: 85px 6%;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      footer {
-        padding: 40px 6% 25px;
-      }
-
-      .footer-top,
-      .footer-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
+    :root{--red:#b91c2c;--red2:#e02b40;--black:#111216;--surface:#191b21;--panel:#20232b;--white:#e8e8e8;--muted:#a6a8ae;--line:#353943;--max:1240px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:92px}
+    body{background:var(--black);color:var(--white);font-family:Inter,Arial,sans-serif;line-height:1.6}
+    body.menu-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    img{max-width:100%;display:block}
+    :focus-visible{outline:3px solid #ff6877;outline-offset:4px}
+    .wrap{width:min(var(--max),calc(100% - 10%));margin-inline:auto}
+    .eyebrow{font-size:.7rem;font-weight:800;letter-spacing:.22em;color:var(--red2);text-transform:uppercase}
+    h1,h2,h3,.display{font-family:"Barlow Condensed",Impact,sans-serif;text-transform:uppercase;line-height:.92;font-weight:900}
+    h2{font-size:clamp(3.4rem,7vw,6.2rem);letter-spacing:-.025em}
+    h2 span,.accent{color:var(--red2)}
+    .topbar{height:78px;position:sticky;top:0;z-index:20;background:#111216ed;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff14}
+    .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:inline-flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.16em;font-size:.95rem;white-space:nowrap}
+    .brand-mark{width:7px;height:31px;background:var(--red);display:inline-block;transform:skew(-12deg)}
+    .nav-links{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
+    .nav-links a,.status{font-size:.65rem;font-weight:800;letter-spacing:.12em;color:#c3c5cb;transition:color .2s}
+    .nav-links a:hover{color:#fff}
+    .status{color:#ff6574;white-space:nowrap}
+    .menu-btn{display:none;border:1px solid var(--line);background:transparent;color:#fff;padding:10px 12px;font-size:.7rem;letter-spacing:.12em}
+    .hero{min-height:690px;position:relative;display:flex;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 78% 38%,#8f172533,transparent 38%),linear-gradient(110deg,#111216 5%,#171920 58%,#24171c 100%)}
+    .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49%,#ffffff08 50%,transparent 51%),linear-gradient(0deg,transparent 49%,#ffffff08 50%,transparent 51%);background-size:70px 70px;mask-image:linear-gradient(90deg,#000,transparent)}
+    .hero:after{content:"001";position:absolute;right:5%;bottom:-.25em;font:900 clamp(16rem,40vw,38rem)/.8 "Barlow Condensed",sans-serif;color:#ffffff08;pointer-events:none}
+    .hero-content{position:relative;z-index:1;padding:110px 0 125px;max-width:790px}
+    .hero h1{font-size:clamp(5.7rem,15vw,12.5rem);letter-spacing:-.055em;margin:20px 0 12px}
+    .hero h1 span{color:var(--red)}
+    .subtitle{font-size:.78rem;font-weight:800;letter-spacing:.24em}
+    .intro{max-width:550px;color:#c1c3ca;font-size:.95rem;line-height:1.9;margin:25px 0 32px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:25px;padding:15px 21px;background:var(--red);color:#fff;font-size:.7rem;font-weight:900;letter-spacing:.12em;border:1px solid var(--red);transition:.2s}
+    .btn:hover{background:var(--red2);border-color:var(--red2);transform:translateY(-2px)}
+    .btn.secondary{background:transparent;border-color:#656975;color:#eee}
+    .btn.secondary:hover{border-color:#fff;background:#ffffff0b}
+    .hero-meta{position:absolute;bottom:27px;left:5%;right:5%;z-index:2;display:flex;justify-content:space-between;gap:15px;color:#92959e;font-size:.58rem;letter-spacing:.16em;font-weight:700}
+    .section{padding:100px 0}
+    .section-light{background:var(--white);color:var(--black)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:38px}
+    .section-head .eyebrow{margin-bottom:16px}
+    .section-light .eyebrow{color:var(--red)}
+    .section-intro{max-width:490px;color:#b7bac2;font-size:.9rem;line-height:1.85;margin-top:20px}
+    .section-light .section-intro{color:#626671}
+    .news-grid,.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .news-card{background:#fff;border:1px solid #d4d6da;min-height:260px;display:flex;flex-direction:column;transition:.22s}
+    .news-card:hover,.data-card:hover{transform:translateY(-5px)}
+    .news-art{height:125px;background:linear-gradient(135deg,#68131f,#bd2637);position:relative;overflow:hidden}
+    .news-art:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #ffffff45;right:8%;top:-70px;transform:rotate(35deg)}
+    .news-art.gray{background:linear-gradient(135deg,#343944,#171a20)}
+    .news-art.silver{background:linear-gradient(135deg,#d5d7dc,#747b87)}
+    .news-body{padding:22px}
+    .tag{font-size:.62rem;color:var(--red);font-weight:900;letter-spacing:.16em;margin-bottom:11px}
+    .news-body h3,.data-card h3{font-size:1.8rem;margin-bottom:8px}
+    .news-body p{font-size:.8rem;color:#656a75;line-height:1.75}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .feature-visual{min-height:340px;border:1px solid #484c57;background:radial-gradient(circle at 50% 45%,#b91c2c55,transparent 35%),repeating-linear-gradient(135deg,#252832,#252832 2px,#1b1e25 2px,#1b1e25 18px);display:grid;place-items:center;position:relative;overflow:hidden}
+    .feature-visual strong{font:900 clamp(8rem,18vw,14rem)/.8 "Barlow Condensed",sans-serif;color:var(--red);text-shadow:0 15px 50px #0008}
+    .feature-visual small{position:absolute;bottom:20px;left:22px;color:#b9bbc2;font-size:.62rem;letter-spacing:.18em}
+    .mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#c9cbd0;border:1px solid #c9cbd0;margin-top:42px}
+    .mode{background:var(--white);padding:28px;min-height:150px}
+    .mode b{display:block;font:900 2.7rem "Barlow Condensed",sans-serif;color:var(--red);margin-bottom:14px}
+    .mode span{font-size:.75rem;font-weight:900;letter-spacing:.14em}
+    .mode p{font-size:.76rem;color:#686d77;margin-top:9px}
+    .dark-section{background:var(--surface)}
+    .data-card{background:linear-gradient(145deg,#242832,#191b21);border:1px solid #3d424d;padding:28px;min-height:260px;position:relative;overflow:hidden;transition:.22s}
+    .data-card:after{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff16;right:-95px;bottom:-95px;transform:rotate(45deg)}
+    .data-card .code{font-size:.62rem;letter-spacing:.16em;color:#ff7180;font-weight:900}
+    .data-card h3{font-size:2.7rem;margin:22px 0 9px}
+    .data-card p{font-size:.8rem;color:#b8bbc3;line-height:1.8;max-width:340px}
+    .specs{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+    .specs span{border:1px solid #555b67;padding:6px 9px;color:#d6d8dd;font-size:.62rem;letter-spacing:.08em}
+    .notice{margin-top:22px;padding:14px 17px;border-left:3px solid var(--red);background:#ffffff08;color:#bfc2ca;font-size:.75rem;line-height:1.7}
+    .map-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:15px;margin-top:38px}
+    .map-card{min-height:270px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;background:linear-gradient(145deg,#4c1720,#20232b);border:1px solid #4b4f59}
+    .map-card:nth-child(2){background:linear-gradient(145deg,#343b49,#1d2027)}
+    .map-card:nth-child(3){background:linear-gradient(145deg,#26404a,#1d2027)}
+    .map-card:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff20;right:-95px;bottom:-115px;transform:rotate(45deg)}
+    .map-card small,.map-card strong,.map-card span{position:relative;z-index:1}
+    .map-card small,.map-card span{font-size:.62rem;letter-spacing:.16em;color:#c4c7ce}
+    .map-card strong{font:900 4rem "Barlow Condensed",sans-serif}
+    .map-card .state{color:#ff8b96}
+    .system-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:38px}
+    .system-item{padding:23px;background:#1a1c22;border:1px solid #383c46}
+    .system-item b{display:block;font:900 2.2rem "Barlow Condensed",sans-serif;color:var(--red2);margin-bottom:8px}
+    .system-item span{font-size:.68rem;letter-spacing:.1em;font-weight:800}
+    .system-item p{font-size:.73rem;color:#aeb1ba;margin-top:8px}
+    .studio{background:var(--red);padding:78px 0}
+    .studio-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .studio h2{font-size:clamp(3rem,6vw,5.5rem)}
+    .studio p{font-size:.72rem;letter-spacing:.16em;margin-top:14px}
+    .studio .btn{background:var(--white);border-color:var(--white);color:var(--black)}
+    footer{background:#0b0c0f;padding:45px 0 25px}
+    .footer-top,.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .footer-top{padding-bottom:30px}
+    .footer-slogan{font-size:.65rem;letter-spacing:.2em;color:#a6a8ae}
+    .footer-bottom{border-top:1px solid #2c2f36;padding-top:20px;color:#858994;font-size:.58rem;letter-spacing:.12em;flex-wrap:wrap}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
+    .footer-links a{font-size:.65rem;color:#b8bbc2}
+    .footer-links a:hover{color:#fff}
+    @media(max-width:900px){.status{display:none}.nav-links{gap:12px}.nav-links a{font-size:.58rem}.split{gap:32px}.system-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:680px){
+      html{scroll-padding-top:78px}.topbar{height:70px}.wrap{width:calc(100% - 11%)}
+      .menu-btn{display:block}.nav-links{display:none;position:absolute;top:69px;left:0;right:0;padding:18px 6%;background:#111216f7;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:18px}
+      .nav-links.open{display:flex}.nav-links a{font-size:.72rem}.hero{min-height:650px}.hero-content{padding:100px 0 120px}.hero-meta{font-size:.48rem;left:5%;right:5%;flex-wrap:wrap}
+      .section{padding:75px 0}.section-head{align-items:flex-start;flex-direction:column}.news-grid,.three-grid,.mode-grid,.map-grid,.split{grid-template-columns:1fr}
+      .feature-visual{min-height:250px}.mode-grid{gap:1px}.map-card{min-height:220px}.system-grid{grid-template-columns:1fr 1fr}
+      .studio-inner,.footer-top,.footer-bottom{align-items:flex-start;flex-direction:column}
+    }
+    @media(max-width:390px){.system-grid{grid-template-columns:1fr}.hero h1{font-size:5.2rem}.hero-meta span:nth-child(2){display:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
   </style>
 </head>
-
 <body>
-
-  <header class="navbar">
-    <a href="#anasayfa" class="logo">
-      <div class="logo-symbol"><span>V</span></div>
-      <span>VERSE MATE STUDIOS</span>
-    </a>
-
-    <button class="menu-button" aria-expanded="false" aria-controls="nav-links">
-      MENÜ
-    </button>
-
-    <nav class="nav-links" id="nav-links">
-      <a href="#anasayfa">ANA SAYFA</a>
-      <a href="#hakkimizda">STÜDYO</a>
-      <a href="#projeler">PROJELER</a>
-      <a href="#surec">YAKLAŞIMIMIZ</a>
-      <a href="#iletisim" class="nav-contact">İLETİŞİM ↗</a>
-    </nav>
+  <header class="topbar">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#anasayfa" aria-label="IGNITION ana sayfa"><i class="brand-mark" aria-hidden="true"></i><span>IGNITION</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">MENÜ</button>
+      <nav class="nav-links" id="main-nav" aria-label="Ana navigasyon">
+        <a href="#anasayfa">ANA SAYFA</a><a href="#oyun">OYUN</a><a href="#operatorler">OPERATÖRLER</a><a href="#silahlar">SİLAHLAR</a><a href="#haritalar">HARİTALAR</a><a href="#haberler">HABERLER</a><a href="#studyo">STÜDYO</a>
+      </nav>
+      <span class="status">● GELİŞTİRİLİYOR</span>
+    </div>
   </header>
 
   <main>
-
     <section class="hero" id="anasayfa">
-      <div class="hero-orbit"></div>
-
-      <div class="hero-content">
-        <p class="eyebrow">INDEPENDENT GAME DEVELOPMENT STUDIO</p>
-
-        <h1>VERSE MATE<span>.</span></h1>
-
-        <p class="hero-subtitle">CREATE BEYOND LIMITS.</p>
-
-        <p class="hero-description">
-          Fikirleri interaktif deneyimlere dönüştürüyoruz.
-          Özgün oyun dünyaları, yaratıcı sistemler ve
-          dijital deneyimler üzerine çalışıyoruz.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#projeler" class="button button-primary">
-            PROJELERİ KEŞFET ↗
-          </a>
-
-          <a href="#hakkimizda" class="button button-outline">
-            STÜDYOMUZU TANI
-          </a>
-        </div>
+      <div class="wrap hero-content">
+        <p class="eyebrow">VERSE MATE STUDIOS SUNAR</p>
+        <h1>IGNITION<span>.</span></h1>
+        <p class="subtitle">5'E 5 TAKTİKSEL FPS DENEYİMİ</p>
+        <p class="intro">Takımını kur. Stratejini belirle. Mücadeleye katıl. IGNITION, takım koordinasyonu ve taktiksel kararlar üzerine tasarlanan özgün bir rekabetçi FPS projesidir.</p>
+        <div class="actions"><a class="btn" href="#oyun">OYUNU KEŞFET <span>↗</span></a><a class="btn secondary" href="https://github.com/keremhanhan/IGNITION" target="_blank" rel="noopener noreferrer">PROJE DEPOSU ↗</a></div>
       </div>
-
-      <div class="hero-index">
-        VERSE MATE STUDIOS / EST. 2026
-      </div>
+      <div class="hero-meta"><span>IGNITION PROJECT / 001</span><span>DIFFERENT BY DESIGN</span><span>PC / GELİŞTİRİLİYOR</span></div>
     </section>
 
-    <section class="intro" id="hakkimizda">
-      <p class="eyebrow">01 / BİZ KİMİZ?</p>
-
-      <h2>
-        FİKİRLERİ<br>
-        <span>DENEYİMLERE</span><br>
-        DÖNÜŞTÜRÜYORUZ.
-      </h2>
-
-      <div class="intro-bottom">
-        <p>
-          Verse Mate Studios, özgün dijital deneyimler ve oyun
-          projeleri geliştirmeyi hedefleyen bağımsız bir stüdyo
-          girişimidir. Tasarım, teknoloji ve oyun geliştirmeyi
-          aynı üretim sürecinde buluşturuyoruz.
-        </p>
-
-        <div>
-          <div class="intro-label">OUR VISION</div>
-          <p>
-            Kendi kimliğine sahip, özgün ve akılda kalıcı
-            dijital dünyalar oluşturmak.
-          </p>
+    <section class="section section-light" id="haberler">
+      <div class="wrap">
+        <div class="section-head"><div><p class="eyebrow">IGNITION'DAN GELİŞMELER</p><h2>SON <span>GELİŞMELER.</span></h2></div><a class="text-link" href="https://github.com/keremhanhan/IGNITION" target="_blank" rel="noopener noreferrer">PROJEYİ İNCELE ↗</a></div>
+        <div class="news-grid">
+          <article class="news-card"><div class="news-art"></div><div class="news-body"><div class="tag">PROJE / 001</div><h3>GELİŞTİRME SÜRECİ</h3><p>IGNITION'ın tasarım hedefleri ve geliştirme yolculuğu devam ediyor.</p></div></article>
+          <article class="news-card"><div class="news-art gray"></div><div class="news-body"><div class="tag">HARİTA / 001</div><h3>MASH</h3><p>İlk harita konsepti proje dokümanlarında yer alıyor.</p></div></article>
+          <article class="news-card"><div class="news-art silver"></div><div class="news-body"><div class="tag">DOKÜMANTASYON</div><h3>PROJE DOSYASI</h3><p>Oyun tasarım belgesini inceleyerek projenin mevcut kapsamını keşfet.</p></div></article>
         </div>
       </div>
     </section>
 
-    <section class="about">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">02 / STÜDYO FELSEFESİ</p>
-          <h2>NASIL<br>ÜRETİYORUZ?</h2>
-        </div>
-
-        <p>
-          Her projenin kendine özgü bir kimliği olmalı.
-          Bizim için iyi bir deneyim, doğru fikirle başlar.
-        </p>
-      </div>
-
-      <div class="values">
-        <article class="value-card">
-          <span class="value-number">01 / CREATIVITY</span>
-          <h3>YARATICILIK.</h3>
-          <p>
-            Alışılmışın dışına çıkan fikirler ve özgün
-            oyun dünyaları geliştirmeyi önemsiyoruz.
-          </p>
-        </article>
-
-        <article class="value-card">
-          <span class="value-number">02 / TECHNOLOGY</span>
-          <h3>TEKNOLOJİ.</h3>
-          <p>
-            Modern geliştirme araçlarını kullanarak
-            fikirleri çalışan deneyimlere dönüştürmeyi hedefliyoruz.
-          </p>
-        </article>
-
-        <article class="value-card">
-          <span class="value-number">03 / IDENTITY</span>
-          <h3>KİMLİK.</h3>
-          <p>
-            Her projenin kendine ait bir görsel dili,
-            atmosferi ve karakteri olmalı.
-          </p>
-        </article>
+    <section class="section" id="oyun">
+      <div class="wrap split">
+        <div><p class="eyebrow">01 / OYUN DENEYİMİ</p><h2>TAKTİK.<br><span>TAKIM.</span><br>REKABET.</h2><p class="section-intro">IGNITION, 5'e 5 karşılaşmalar üzerine kurulu taktiksel bir birinci şahıs nişancı oyunu projesidir. Tasarımın merkezinde takım koordinasyonu, doğru zamanlama ve stratejik kararlar bulunur.</p></div>
+        <div class="feature-visual" aria-label="Beşe beş oyun formatını temsil eden görsel"><strong>5V5</strong><small>TACTICAL FPS / PROJECT VISION</small></div>
       </div>
     </section>
 
-    <section class="projects" id="projeler">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">03 / PROJE PORTFÖYÜ</p>
-          <h2>ÜRETTİKLERİMİZ.</h2>
+    <section class="section section-light">
+      <div class="wrap"><p class="eyebrow">02 / OYUN MODLARI</p><h2>HER RAUNT<br><span>YENİ BİR SINAV.</span></h2><p class="section-intro">IGNITION için tasarlanan mod yapısı farklı rekabet tempolarını hedefliyor. Modlar geliştirme planının parçasıdır.</p>
+        <div class="mode-grid">
+          <article class="mode"><b>01</b><span>DERECESİZ</span><p>Rekabetçi baskı olmadan maç deneyimi hedefi.</p></article>
+          <article class="mode"><b>02</b><span>REKABETÇİ</span><p>Dereceli takım mücadelesi için planlanan mod.</p></article>
+          <article class="mode"><b>03</b><span>FAST VERSE</span><p>Daha kısa tempolu karşılaşmalar için tasarlanan mod.</p></article>
         </div>
-
-        <p>
-          Stüdyomuzun geliştirme sürecindeki projelerini keşfedin.
-        </p>
-      </div>
-
-      <article class="project-card">
-        <div class="project-visual">
-          <strong>IGNITION</strong>
-        </div>
-
-        <div class="project-info">
-          <span class="project-status">
-            GAME PROJECT / IN DEVELOPMENT
-          </span>
-
-          <h3>IGNITION.</h3>
-
-          <p>
-            Takım koordinasyonu, taktiksel kararlar ve rekabetçi
-            karşılaşmalar üzerine tasarlanan 5'e 5 FPS projemiz.
-          </p>
-
-          <a
-            href="http://localhost:5174/"
-            class="button button-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            PROJE SAYFASINI AÇ ↗
-          </a>
-        </div>
-      </article>
-    </section>
-
-    <section class="process" id="surec">
-      <p class="eyebrow">04 / GELİŞTİRME YAKLAŞIMI</p>
-
-      <h2 style="font-size:clamp(55px,8vw,95px)">
-        FİKİRDEN<br>GERÇEĞE.
-      </h2>
-
-      <div class="process-grid">
-        <article class="process-item">
-          <b>01</b>
-          <h3>FİKİR</h3>
-          <p>
-            Projenin amacını, hedeflerini ve temel deneyimini belirlemek.
-          </p>
-        </article>
-
-        <article class="process-item">
-          <b>02</b>
-          <h3>TASARIM</h3>
-          <p>
-            Oyun sistemlerini, görsel kimliği ve kullanıcı deneyimini planlamak.
-          </p>
-        </article>
-
-        <article class="process-item">
-          <b>03</b>
-          <h3>GELİŞTİRME</h3>
-          <p>
-            Tasarımları çalışan sistemlere ve oynanabilir prototiplere dönüştürmek.
-          </p>
-        </article>
-
-        <article class="process-item">
-          <b>04</b>
-          <h3>İYİLEŞTİRME</h3>
-          <p>
-            Testler ve geri bildirimlerle deneyimi geliştirmek.
-          </p>
-        </article>
       </div>
     </section>
 
-    <section class="contact" id="iletisim">
-      <div>
-        <p class="eyebrow">05 / İLETİŞİM</p>
-        <h2>BİR FİKRİN<br>VAR MI?</h2>
-        <p>
-          Projeler, iş birlikleri ve stüdyo hakkında sorular için
-          bizimle iletişime geçebilirsin.
-        </p>
+    <section class="section dark-section" id="operatorler">
+      <div class="wrap"><p class="eyebrow">03 / KARAKTER SİSTEMİ</p><h2>OPERATÖRLER.<br><span>ROLÜNÜ SEÇ.</span></h2><p class="section-intro">Operatörler ve yetenekleri IGNITION'ın tasarım başlıkları arasında. Karakter isimleri, sınıflar ve yetenek ayrıntıları kesinleştiğinde burada yayımlanacak.</p>
+        <div class="notice">Operatör listesi henüz kesinleşmiş bir içerik olarak sunulmuyor. Bu bölüm, tasarım detayları onaylandıkça güncellenecek.</div>
       </div>
-
-      <a href="mailto:contact@versemate.com" class="button button-primary">
-        E-POSTA GÖNDER ↗
-      </a>
     </section>
 
+    <section class="section" id="silahlar">
+      <div class="wrap"><p class="eyebrow">04 / SİLAH VERİTABANI</p><h2>EKİPMANINI <span>TANI.</span></h2><p class="section-intro">Proje dokümanlarında tanımlanan ilk iki silah kaydı. Değerler mevcut tasarım verileridir, nihai oyun dengesi garantisi değildir.</p>
+        <div class="three-grid" style="margin-top:38px">
+          <article class="data-card"><span class="code">WPN-001 / TÜFEK</span><h3>DASH</h3><p>IGNITION silah envanterinde tanımlanan tüfek kaydı.</p><div class="specs"><span>2900 IC</span><span>25 MERMİ</span><span>50 YEDEK</span></div></article>
+          <article class="data-card"><span class="code">WPN-002 / TABANCA</span><h3>reICON</h3><p>Proje dokümanında ücretsiz başlangıç tabancası olarak tanımlanır.</p><div class="specs"><span>ÜCRETSİZ</span><span>15 MERMİ</span><span>30 YEDEK</span></div></article>
+          <article class="data-card"><span class="code">ARSENAL / PLANLANAN</span><h3>DEVAMI GELECEK</h3><p>Diğer silah kayıtları tasarım ve dengeleme çalışmaları ilerledikçe eklenecek.</p><div class="specs"><span>GELİŞTİRME AŞAMASINDA</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="haritalar">
+      <div class="wrap"><p class="eyebrow">05 / HARİTA VERİTABANI</p><h2>SAVAŞ ALANINI <span>TANI.</span></h2>
+        <div class="map-grid">
+          <article class="map-card"><small>HARİTA / 001</small><strong>MASH</strong><span>İLK HARİTA KONSEPTİ</span></article>
+          <article class="map-card"><small>HARİTA / 002</small><strong>TEXFI</strong><span class="state">PLANLANAN HARİTA</span></article>
+          <article class="map-card"><small>HARİTA / 003</small><strong>SPLASH</strong><span class="state">PLANLANAN HARİTA</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap"><p class="eyebrow">06 / REKABETÇİ SİSTEM</p><h2>RAUNT RAUNT.<br><span>TAKIM TAKIM.</span></h2><p class="section-intro">Tasarım belgesinde tanımlanan maç yapısının temel başlıkları.</p>
+        <div class="system-grid">
+          <div class="system-item"><b>5V5</b><span>TAKIM YAPISI</span><p>İki takım, beşer oyuncu.</p></div>
+          <div class="system-item"><b>12</b><span>İLK YARI</span><p>12. raunttan sonra taraf değişimi.</p></div>
+          <div class="system-item"><b>13</b><span>HEDEF</span><p>Maçı kazanmak için 13 raunt hedefi.</p></div>
+          <div class="system-item"><b>IC</b><span>EKONOMİ</span><p>Silah satın alma ekonomisi tasarımın parçası.</p></div>
+        </div>
+        <div class="notice">Bu bilgiler oyun tasarım hedeflerini açıklar. Oynanabilir sürümdeki nihai kurallar ve denge değerleri değişebilir.</div>
+      </div>
+    </section>
+
+    <section class="studio" id="studyo">
+      <div class="wrap studio-inner"><div><p class="eyebrow" style="color:#ffe1e4">VERSE MATE STUDIOS / IGNITION PROJECT</p><h2>FARKLI OLMAK<br>TASARIMIMIZDA VAR.</h2><p>INDEPENDENT GAME PROJECT · DEVELOPMENT IN PROGRESS</p></div><a class="btn" href="https://github.com/keremhanhan/IGNITION" target="_blank" rel="noopener noreferrer">PROJEYİ İNCELE ↗</a></div>
+    </section>
   </main>
 
   <footer>
-    <div class="footer-top">
-      <a href="#anasayfa" class="logo">
-        <div class="logo-symbol"><span>V</span></div>
-        <span>VERSE MATE STUDIOS</span>
-      </a>
-
-      <p class="footer-slogan">CREATE BEYOND LIMITS.</p>
-    </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 VERSE MATE STUDIOS</span>
-      <span>INDEPENDENT GAME DEVELOPMENT</span>
-      <span>ALL RIGHTS RESERVED</span>
-    </div>
-
-    <div class="footer-links">
-      <a href="gizlilik.html">GİZLİLİK POLİTİKASI</a>
-      <a href="#anasayfa">YUKARI ÇIK ↑</a>
+    <div class="wrap">
+      <div class="footer-top"><a class="brand" href="#anasayfa"><i class="brand-mark" aria-hidden="true"></i><span>IGNITION</span></a><p class="footer-slogan">DIFFERENT BY DESIGN.</p></div>
+      <div class="footer-bottom"><span>© 2026 VERSE MATE STUDIOS</span><span>PC / GELİŞTİRME AŞAMASINDA</span><span>IGNITION IS AN ORIGINAL PROJECT</span></div>
+      <div class="footer-links"><a href="https://github.com/keremhanhan/IGNITION" target="_blank" rel="noopener noreferrer">GITHUB PROJESİ ↗</a><a href="https://github.com/keremhanhan/IGNITION/blob/main/IGNITION_GDD_v0.2_TR.pdf" target="_blank" rel="noopener noreferrer">OYUN TASARIM BELGESİ ↗</a></div>
     </div>
   </footer>
 
   <script>
-    const menuButton = document.querySelector(".menu-button");
-    const nav = document.querySelector("#nav-links");
-
+    const menuButton = document.querySelector(".menu-btn");
+    const nav = document.querySelector("#main-nav");
     menuButton.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-      menuButton.textContent = isOpen ? "KAPAT" : "MENÜ";
+      const opened = nav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(opened));
+      menuButton.textContent = opened ? "KAPAT" : "MENÜ";
+      document.body.classList.toggle("menu-open", opened);
     });
-
-    document.querySelectorAll("#nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.textContent = "MENÜ";
-      });
-    });
+    nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.textContent = "MENÜ";
+      document.body.classList.remove("menu-open");
+    }));
   </script>
-
 </body>
 </html>
