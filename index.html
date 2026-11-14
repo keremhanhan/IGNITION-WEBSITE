@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17191e" />
+  <meta name="description" content="IGNITION, Verse Mate Studios tarafından geliştirilen 5'e 5 taktiksel FPS deneyimi." />
+  <title>IGNITION | Different by Design</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --red: #b91c2c;
+      --black: #17191e;
+      --panel: #202229;
+      --white: #e8e8e8;
+      --muted: #a6a8ae;
+      --line: #383b43;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .topbar {
+      height: 82px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #17191ef2;
+      border-bottom: 1px solid var(--line);
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 16px;
+    }
+
+    .brand-mark {
+      width: 8px;
+      height: 34px;
+      background: var(--red);
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    nav a,
+    .status {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      color: #c2c4ca;
+      transition: .2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: white;
+    }
+
+    nav a.active:after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: var(--red);
+      margin-top: 9px;
+    }
+
+    .status {
+      color: var(--red);
+    }
+
+    .menu {
+      display: none;
+      background: none;
+      color: white;
+      border: 1px solid #666;
+      padding: 10px 12px;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      min-height: 760px;
+      display: flex;
+      align-items: center;
+      padding: 145px 9% 100px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, #17191ef5 0%, #17191ecb 48%, #17191e55 100%),
+        linear-gradient(0deg, #17191e 0%, transparent 50%),
+        url('/images/ignition-city.png') center/cover;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .08;
+      pointer-events: none;
+      background-image:
+        linear-gradient(#fff 1px, transparent 1px),
+        linear-gradient(90deg, #fff 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(90deg, #000, transparent 80%);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Barlow Condensed', Impact, sans-serif;
+      text-transform: uppercase;
+      font-weight: 900;
+      line-height: .9;
+    }
+
+    h1 {
+      font-size: clamp(90px, 14vw, 178px);
+      letter-spacing: -3px;
+    }
+
+    h1 span,
+    h2 span {
+      color: var(--red);
+    }
+
+    .subtitle {
+      margin-top: 22px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-weight: 800;
+    }
+
+    .intro {
+      max-width: 470px;
+      color: #c2c4ca;
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 26px 0 32px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 35px;
+      background: var(--red);
+      padding: 18px 25px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
+      transition: .2s;
+    }
+
+    .cta:hover {
+      background: #dc2b3e;
+      transform: translateY(-2px);
+    }
+
+    .hero-meta {
+      position: absolute;
+      z-index: 1;
+      bottom: 30px;
+      left: 9%;
+      right: 9%;
+      display: flex;
+      justify-content: space-between;
+      color: #a6a8ae;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    .news {
+      padding: 95px 9%;
+      background: #e8e8e8;
+      color: #17191e;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 38px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(48px, 7vw, 82px);
+    }
+
+    .section-head h2 span {
+      color: var(--red);
+    }
+
+    .text-link {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: #fff;
+      min-height: 255px;
+      border: 1px solid #d4d5d8;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px #17191e18;
+    }
+
+    .card-art {
+      height: 125px;
+      background: linear-gradient(135deg, #272a32, #454954);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-art:before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 1px solid #ffffff25;
+      transform: rotate(35deg);
+      right: 20px;
+      top: -75px;
+    }
+
+    .card-art.red {
+      background: linear-gradient(135deg, #6c101b, #b91c2c);
+    }
+
+    .card-art.light {
+      background: linear-gradient(135deg, #d6d7da, #777d88);
+    }
+
+    .card-body {
+      padding: 22px;
+    }
+
+    .tag {
+      font-size: 9px;
+      letter-spacing: 2px;
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 12px;
+      line-height: 1.7;
+      color: #666a73;
+    }
+
+    .feature {
+      min-height: 520px;
+      padding: 100px 9%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      background: #202229;
+    }
+
+    .feature h2,
+    .about h2 {
+      font-size: clamp(60px, 8vw, 100px);
+      margin-bottom: 24px;
+    }
+
+    .feature p,
+    .about p {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #b8bac1;
+      max-width: 490px;
+    }
+
+    .feature-art {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, #b91c2c33, transparent 55%),
+        repeating-linear-gradient(45deg, #292c34, #292c34 2px, #202229 2px, #202229 20px);
+      border: 1px solid #555963;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-art strong {
+      font: 900 clamp(100px, 18vw, 210px)/.8 'Barlow Condensed', sans-serif;
+      color: #b91c2c;
+    }
+
+    .about {
+      padding: 110px 9%;
+      background: #e8e8e8;
+      color: #17191e;
+    }
+
+    .about p {
+      color: #555963;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #c9cbd0;
+      margin-top: 48px;
+      border: 1px solid #c9cbd0;
+    }
+
+    .about-item {
+      background: #e8e8e8;
+      padding: 28px;
+    }
+
+    .about-item b {
+      display: block;
+      font: 900 42px 'Barlow Condensed', sans-serif;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .about-item span {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+    }
+
+    .maps {
+      padding: 100px 9%;
+      background: #17191e;
+    }
+
+    .maps h2 {
+      font-size: clamp(58px, 8vw, 100px);
+      margin-bottom: 38px;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .map-card {
+      min-height: 270px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, #343842, #1f2229);
+      border: 1px solid #4b4f59;
+    }
+
+    .map-card:after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 1px solid #ffffff20;
+      right: -80px;
+      bottom: -110px;
+      transform: rotate(45deg);
+    }
+
+    .map-card:first-child {
+      background: linear-gradient(145deg, #5a1720, #25252c);
+    }
+
+    .map-card small {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #c2c4ca;
+      z-index: 1;
+    }
+
+    .map-card strong {
+      font: 900 62px 'Barlow Condensed', sans-serif;
+      z-index: 1;
+    }
+
+    .map-card span {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #c2c4ca;
+      z-index: 1;
+    }
+
+    .closing {
+      padding: 85px 9%;
+      background: var(--red);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .closing h2 {
+      font-size: clamp(42px, 6vw, 72px);
+    }
+
+    .closing p {
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-top: 12px;
+    }
+
+    .closing .cta {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    footer {
+      padding: 48px 9% 28px;
+      background: #111216;
+    }
+
+    .footer-top,
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-top {
+      padding-bottom: 35px;
+    }
+
+    .footer-slogan {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #a6a8ae;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #303239;
+      padding-top: 22px;
+      color: #737780;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+    }
+
+    .footer-legal {
+      border-top: 1px solid #303239;
+      margin-top: 22px;
+      padding-top: 20px;
+    }
+
+    .footer-legal a {
+      color: #a6a8ae;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      transition: .2s;
+    }
+
+    .footer-legal a:hover {
+      color: white;
+    }
+
+    @media(max-width:850px) {
+      .topbar {
+        padding: 0 5%;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      nav a {
+        font-size: 9px;
+      }
+
+      .status {
+        display: none;
+      }
+
+      .feature {
+        gap: 30px;
+        padding: 80px 7%;
+      }
+    }
+
+    @media(max-width:650px) {
+      .topbar {
+        height: auto;
+        min-height: 72px;
+        flex-wrap: wrap;
+        padding: 17px 5%;
+      }
+
+      .menu {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        padding: 15px 0 8px;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      nav a.active:after {
+        display: none;
+      }
+
+      .hero {
+        min-height: 680px;
+        padding: 130px 6% 100px;
+        background-position: 60% center;
+      }
+
+      .hero-meta {
+        left: 6%;
+        right: 6%;
+        font-size: 8px;
+      }
+
+      .news,
+      .maps,
+      .about {
+        padding: 75px 6%;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .cards,
+      .about-grid,
+      .map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 230px;
+      }
+
+      .feature {
+        grid-template-columns: 1fr;
+        padding: 75px 6%;
+      }
+
+      .feature-art {
+        min-height: 240px;
+      }
+
+      .closing {
+        padding: 65px 6%;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      footer {
+        padding: 40px 6%;
+      }
+
+      .footer-top,
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="/index.html">
+      <i class="brand-mark"></i>
+      <span>IGNITION</span>
+    </a>
+
+    <button class="menu" aria-expanded="false" aria-controls="main-nav">
+      MENÜ
+    </button>
+
+    <nav id="main-nav">
+      <a class="active" href="#anasayfa">ANA SAYFA</a>
+      <a href="#oyun">OYUN</a>
+      <a href="#haritalar">HARİTALAR</a>
+      <a href="#haberler">HABERLER</a>
+      <a href="#studyo">STÜDYO</a>
+    </nav>
+
+    <span class="status">GELİŞTİRİLİYOR</span>
+  </header>
+
+  <main>
+    <section class="hero" id="anasayfa">
+      <div class="hero-copy">
+        <p class="eyebrow">VERSE MATE STUDIOS SUNAR</p>
+        <h1>IGNITION<span>.</span></h1>
+        <p class="subtitle">5'E 5 TAKTİKSEL FPS DENEYİMİ</p>
+        <p class="intro">
+          Takımını kur. Stratejini belirle. Mücadeleye katıl.
+          Özgün operatörler, taktiksel kararlar ve rekabetçi karşılaşmalar seni bekliyor.
+        </p>
+        <a class="cta" href="#oyun">
+          OYUNU KEŞFET <span>↗</span>
+        </a>
+      </div>
+
+      <div class="hero-meta">
+        <span>IGNITION PROJECT / 001</span>
+        <span>DIFFERENT BY DESIGN</span>
+        <span>PC / GELİŞTİRİLİYOR</span>
+      </div>
+    </section>
+
+    <section class="news" id="haberler">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">IGNITION'DAN GELİŞMELER</p>
+          <h2>SON <span>HABERLER.</span></h2>
+        </div>
+        <a class="text-link" href="#studyo">PROJEYİ TAKİP ET ↗</a>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-art red"></div>
+          <div class="card-body">
+            <div class="tag">GELİŞTİRME / 001</div>
+            <h3>PROJE BAŞLADI</h3>
+            <p>IGNITION'ın geliştirme süreci ve proje hedefleri hakkında bilgi edinin.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-art"></div>
+          <div class="card-body">
+            <div class="tag">HARİTA / 001</div>
+            <h3>MASH</h3>
+            <p>IGNITION'ın ilk harita konsepti üzerinde çalışmalar sürüyor.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-art light"></div>
+          <div class="card-body">
+            <div class="tag">STÜDYO</div>
+            <h3>VERSE MATE STUDIOS</h3>
+            <p>IGNITION'ın arkasındaki geliştirme ekibini ve vizyonunu keşfedin.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="feature" id="oyun">
+      <div>
+        <p class="eyebrow">01 / OYUN DENEYİMİ</p>
+        <h2>TAKTİK.<br><span>TAKIM.</span><br>REKABET.</h2>
+        <p>
+          IGNITION, 5'e 5 karşılaşmalar üzerine kurulu taktiksel bir
+          birinci şahıs nişancı oyunudur. Her raunt takım koordinasyonu,
+          doğru zamanlama ve stratejik kararlar gerektirir.
+        </p>
+      </div>
+
+      <div class="feature-art">
+        <strong>5V5</strong>
+      </div>
+    </section>
+
+    <section class="about">
+      <p class="eyebrow">02 / OYUN MODLARI</p>
+      <h2>HER RAUNT<br><span>YENİ BİR SINAV.</span></h2>
+      <p>
+        Farklı tempolarda mücadele et. Oyun modları IGNITION'ın
+        rekabetçi yapısına göre tasarlanıyor.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-item">
+          <b>01</b>
+          <span>DERECESİZ</span>
+        </div>
+        <div class="about-item">
+          <b>02</b>
+          <span>REKABETÇİ</span>
+        </div>
+        <div class="about-item">
+          <b>03</b>
+          <span>FAST VERSE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="maps" id="haritalar">
+      <p class="eyebrow">03 / HARİTA VERİTABANI</p>
+      <h2>SAVAŞ ALANINI <span>TANI.</span></h2>
+
+      <div class="map-grid">
+        <article class="map-card">
+          <small>HARİTA / 001</small>
+          <strong>MASH</strong>
+          <span>İLK HARİTA KONSEPTİ</span>
+        </article>
+
+        <article class="map-card">
+          <small>HARİTA / 002</small>
+          <strong>TEXFI</strong>
+          <span>GELİŞTİRME AŞAMASINDA</span>
+        </article>
+
+        <article class="map-card">
+          <small>HARİTA / 003</small>
+          <strong>SPLASH</strong>
+          <span>GELİŞTİRME AŞAMASINDA</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing" id="studyo">
+      <div>
+        <h2>FARKLI OLMAK<br>TASARIMIMIZDA VAR.</h2>
+        <p>VERSE MATE STUDIOS / IGNITION PROJECT</p>
+      </div>
+
+      <a class="cta" href="mailto:contact@versemate.com">
+        BİZİMLE İLETİŞİME GEÇ <span>↗</span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <a class="brand" href="/index.html">
+        <i class="brand-mark"></i>
+        <span>IGNITION</span>
+      </a>
+      <p class="footer-slogan">DIFFERENT BY DESIGN.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 VERSE MATE STUDIOS</span>
+      <span>PC / GELİŞTİRİLME AŞAMASINDA</span>
+      <span>IGNITION IS AN ORIGINAL PROJECT</span>
+    </div>
+
+    <div class="footer-legal">
+      <a href="/gizlilik.html">GİZLİLİK POLİTİKASI</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu");
+    const nav = document.querySelector("#main-nav");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.textContent = isOpen ? "KAPAT" : "MENÜ";
+    });
+
+    document.querySelectorAll("#main-nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "MENÜ";
+      });
+    });
+  </script>
+</body>
+</html>
